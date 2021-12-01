@@ -1,0 +1,4 @@
+{
+    "db":"mongodb+srv://zied:0000@cluster0.athgs.mongodb.net/auth-ws?retryWrites=true&w=majority",
+    "secret":"barrr"
+}
