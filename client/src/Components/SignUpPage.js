@@ -16,7 +16,7 @@ const SignUpPage = () => {
     dispatch(signUpUser({FirstName,email,number,password}))
   }
     return (
-        <div>{loading? <Spinner animation="border" variant="success" />:user?<Navigate  to="/login"/>:
+        <div className='signup'>{loading? <Spinner animation="border" variant="success" />:user?<Navigate  to="/login"/>:
          <Form onSubmit={handelSubmit}>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>

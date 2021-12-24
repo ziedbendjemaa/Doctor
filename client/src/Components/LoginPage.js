@@ -2,6 +2,7 @@
 import React, { useState } from 'react'
 import { Form,Button, Spinner } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
+import { Navigate } from 'react-router';
 import { loginUser } from '../redux/action';
 
 
@@ -17,7 +18,7 @@ const LoginPage = () => {
     dispatch(loginUser({email,password}))
   }
     return (
-        <div>{loading? <Spinner animation="border" variant="success" />:
+        <div className='login'>{loading? <Spinner animation="border" variant="success" />:localStorage.getItem("token")?<Navigate to="/admin"/>:
          <Form onSubmit={handelSubmit}>
   <Form.Group className="mb-3" controlId="formBasicEmail">
     <Form.Label>Email address</Form.Label>

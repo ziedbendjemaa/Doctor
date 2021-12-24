@@ -1,5 +1,6 @@
-let jwt=require("jsonwebtoken");
+
 let config=require("config");
+const jwt = require("jsonwebtoken");
 const User = require("../models/user");
 let secret=config.get('secret')
 

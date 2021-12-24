@@ -9,7 +9,7 @@ let secret=config.get("secret")
 
 exports.signUp=async(req,res)=>{
 
-let {FirstName,email,password,number}=req.body;
+let {FirstName,email,password,number,userRole}=req.body;
     try {
         let exestingUser=await user.findOne({email});
         if(exestingUser){
@@ -20,6 +20,7 @@ let {FirstName,email,password,number}=req.body;
             email,
             password,
             number,
+            userRole
         });
         let salt=await bc.genSalt(10);
         let hash=await bc.hashSync(password,salt)
@@ -53,6 +54,7 @@ exports.login=async(req,res)=>{
         let payload={
             id:theUser._id,
             email:theUser.email,
+            userRole:theUser.userRole
 
         }
         let token=jwt.sign(payload,secret)

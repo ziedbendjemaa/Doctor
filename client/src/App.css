@@ -1,5 +1,8 @@
 .App {
   text-align: center;
+  background-image:url(https://www.usine-digitale.fr/mediatheque/7/5/0/001007057_homePageUne/telemedecine.jpg);
+background-repeat: no-repeat;
+background-size: cover;
 }
 
 .App-logo {
@@ -35,4 +38,32 @@
   to {
     transform: rotate(360deg);
   }
+}
+.signup{
+  width: 300px;
+  height: 500px;
+ display: flex;
+ justify-content: center;
+ 
+
+  
+}
+.login{
+  width: 300px;
+  height: 500px;
+ display: flex;
+ justify-content: center;
+
+
+  
+}
+.foter{
+  background: rgb(53, 202, 158);
+  color: #F4F4F9;
+  font-family: monospace;
+  font-weight: 300;
+  letter-spacing: 2.5px;
+  text-align: center;
+  padding-bottom: 1%;
+  padding-top: 8%;
 }
