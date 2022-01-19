@@ -10,7 +10,7 @@ const ProductCardAdmin = ({el}) => {
     return (
        
           <Card  bg="white" variant="inheart" style={{ width: '15rem', height:"400px" ,color:"black" }} className=" m-3">
-  <Card.Img style={{height:"200px",width:"150px"}} variant="top" src={el.imageUrl} />
+      <img src={`http://localhost:5000${el.imageUrl}`}style={{height:"200px",width:"200px"}}/>
   <Card.Body>
     <Card.Title>{el.title}</Card.Title>
     <Card.Text>

@@ -1,24 +1,44 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import { Button, Modal } from 'react-bootstrap'
 import { useDispatch } from 'react-redux'
 import { addProduct } from '../redux/action'
 
 const ADDProductAdmin = () => {
-    const [title, setTitle] = useState("")
-    const [category, setCategory] = useState("")
-    const [description, setDescription] = useState("")
-    const [price, setPrice] = useState("")
-    const [quantity, setQuantity] = useState("")
-    const [imageUrl, setImageUrl] = useState("")
+  
     const dispatch = useDispatch()
-    let handelsubmit=(e)=>{
-        e.preventDefault()
-dispatch(addProduct({title,category,description,price,imageUrl,quantity}))
-    }
+    
     const [show, setShow] = useState(false);
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
+    const [story, setstory] = useState({
+      imageUrl: "",
+      title: "",
+      description: "",
+      price: "",
+      category: "",
+      quantity: "",
+      quantityStock: "",
+     
+    });
+
+    const uploadFileHandler = async (e) => {
+      const file = e.target.files[0];
+      const bodyFormData = new FormData();
+      bodyFormData.append("file", file);
+      const { data } = await axios.post(
+        "http://localhost:3000/product/uploads",
+        bodyFormData
+      );
+      console.log(data);
+      setstory({ ...story, imageUrl: data });
+    };
+    const handleSubmit = () => {
+      dispatch(addProduct(story));
+      
+    };
     return (
         <div>
               <Button variant="primary" onClick={handleShow}>
@@ -27,14 +47,26 @@ dispatch(addProduct({title,category,description,price,imageUrl,quantity}))
 
       <Modal show={show} onHide={handleClose}>
       <Modal.Body>
-      <form onSubmit={handelsubmit} >
-               Title: <input type="text" className="form-control" placeholder="Enter Product Name" onChange={e=> setTitle(e.target.value)} value={title}/>
-               Description: <input type="text" className="form-control" placeholder="Enter Description Product" onChange={e=> setDescription(e.target.value)} value={description} />
-              Image: <input type="url" className="form-control" placeholder="Enter URL Image" onChange={e=> setImageUrl(e.target.value)} value={imageUrl}/>
-             Price : <input type="text" className="form-control" placeholder="Enter Price" onChange={e=> setPrice(e.target.value)} value={price} />
-             Quantity : <input type="number" className="form-control" placeholder="Enter Product quantity" onChange={e=> setQuantity(e.target.value)} value={quantity} />
-              Category: <input type="text" className="form-control" placeholder="Enter Product Category" onChange={e=> setCategory(e.target.value)} value={category} />
-             <Button variant="primary" type="submit">
+      <form onSubmit={handleSubmit} >
+
+      Title: <input type="text" className="form-control" placeholder="Enter Product Name"
+                       onChange={(e) => {setstory({ ...story, title: e.target.value })}}
+                       />
+               Description: <input type="text" className="form-control" placeholder="Enter Description Product"
+             onChange={(e) => {setstory({ ...story, description: e.target.value })}}/>
+
+              Image:   <input type="file" name="file" onChange={uploadFileHandler}/><br/>
+              Price : <input type="text" className="form-control" placeholder="Enter Price"
+              onChange={(e) => {setstory({ ...story, price: e.target.value })}}
+/>
+Quantity : <input type="number" className="form-control" placeholder="Enter Product quantity"
+onChange={(e) => {setstory({ ...story, quantity: e.target.value })}}
+/>
+    
+Category: <input type="text" className="form-control" placeholder="Enter Product Category" 
+onChange={(e) => {setstory({ ...story, category: e.target.value })}}
+/>   
+             <Button variant="primary" type="submit" onClick={handleSubmit}>
             Save Changes
           </Button>
             </form>

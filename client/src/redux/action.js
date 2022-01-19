@@ -133,7 +133,7 @@ export const deleteProduct=(id)=>async(dispatch)=>{
         })
     }
 };
-export const editProduct=(id,title,description,category,price,quantite,imageUrl)=>async(dispatch)=>{
+export const editProduct=(id,newproduct)=>async(dispatch)=>{
     dispatch({
         type:EDIT_PRODUCT
     })
@@ -143,7 +143,6 @@ export const editProduct=(id,title,description,category,price,quantite,imageUrl)
           Authorization: token,
       }
     };
-    let newproduct={id,title,description,category,price,quantite,imageUrl}
 
     try {
         let res=await axios.put(`/product/edit_products/${id}`,newproduct,config)
